@@ -1,0 +1,132 @@
+/***** news listing page *****/
+.listing{
+	@include gap(2rem);
+	@include max(767px){
+		@include gap(1.7rem);
+	}
+	& .newslist{
+		&_item{
+			@include gap(1rem);
+			@include max(767px){
+				@include gap(.5rem);				
+			}
+			&:not(:last-of-type){
+				@include mgn(0 0 1rem);
+				@include pad(0 0 1rem);
+				border-bottom:1px solid darken($light, 10%);
+			}
+		}
+		& .img-outer{
+			aspect-ratio:1/.8;
+			@include radius(.5rem);
+			@include min(768px){
+				width:17rem;
+			}
+			@include max(767px){
+				width:6.5rem;
+			}
+		}
+		&_text{
+			flex:1;
+			& .title{
+				@include mgn(0 0 .5rem);
+				font-weight: 600;
+				color:$dgray;
+				&:hover{
+					color:$ass;
+				}
+				@include max(767px){
+					@include lc(3);
+				}
+			}
+			& p{
+				font-size:1.2rem;
+				@include lc(3);
+				@include max(767px){
+					display: none;
+				}
+			}
+		}
+		&_link{
+
+		}
+	}
+	& .sub-title{
+		text-transform: uppercase;
+		border-bottom:1px solid darken($light, 10%);
+		margin-bottom:1.2rem;
+		&:not(:first-of-type){
+			margin-top:1.4rem;
+		}
+	}
+	&.team{
+		& .item{
+			border:1px solid transparent;
+			@include radius(.5rem);
+			@include transition(all ease-in-out .4s);
+			&:hover{
+				cursor: pointer;
+				border-color:$ass;
+				& img{
+					@include transform(scale(.95));
+				}
+			}
+		}
+		& img{
+			@include radius(.5rem);
+			width:100%;			
+			object-fit: cover;
+			@include transition(all ease-in-out .4s);
+			@include min(768px){
+				height:14rem;
+			}
+		}
+		& figure{
+			width:calc( 100% - 1rem );
+			@include mgn(-1rem auto 0);
+			@include pad(.5rem);
+			@include radius(.5rem);
+			background-color:$light;
+			text-align: center;
+		}
+		& .name{
+			color:$main;
+			font-weight: 600;
+		}
+		& .post{
+			color:$dgray;
+		}
+	}
+	&.archiev{
+		& .list_img{
+			width: 55%;
+			flex:1;
+		}
+	}
+}
+.paginate{
+	margin-top:1.5rem;
+	@include max(767px){		
+		white-space: nowrap;
+		overflow-x:auto;
+		overflow-y:hidden;
+		padding-bottom: 1rem;
+	}
+}
+.page-numbers{
+	padding:.5rem .63rem .3rem;
+	@include radius(.2rem);
+	border:1px solid $main;
+	line-height: 1;
+	color:$dgray;
+	&.current,
+	&:hover{
+		border-color:$main;
+		color:$white;
+		background-color:$main;
+	}
+	&:not(:last-of-type),
+	&.current{
+		@include mgn(0 .5rem 0 0);
+	}
+}

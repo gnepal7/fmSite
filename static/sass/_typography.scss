@@ -1,0 +1,147 @@
+@for $list from 1 through length(6){
+	h#{$list}, .h#{$list}{
+		font-family: $font-title;
+        line-height: 1.5;
+        font-weight: 600;
+	}	
+}
+@for $p from 1 through 12 {
+    .col_#{$p} {
+        grid-column: span #{$p * 1};
+        @include max(767px){
+        	grid-column: span 12;
+        }
+    }
+}
+$ft-sz: 3rem, 1.75rem, 1.5rem, 1.35rem, 1.125rem, 1rem, .875rem ;
+$ft-sz-sm: 1.9rem, 1.5rem, 1.25rem, 1.15rem, 1.1rem, 1rem, .875rem ;
+$lists: 'h1', 'h2', 'h3', 'h4' 'h5','h6', 'h7';
+@for $list from 1 through length($ft-sz){
+	h#{$list}, .h#{$list}{
+		font-size: nth($ft-sz, $list);
+		@include max(767px){
+			font-size: nth($ft-sz-sm, $list);
+		}
+	}
+	//@debug ".h#{$list}: #{$ft-sz-sm}";
+}
+@for $list from 1 through length(6){
+	h#{$list}, .h#{$list}{
+		font-family: $font-title;
+        line-height: 1.5;
+        font-weight: 600;
+	}	
+}
+$img-size:(
+	size-1:(dkt:21.875rem, mob:20rem),
+	size-2:(dkt:20rem, mob:auto),
+	size-3:(dkt:16.25rem, mob:auto),
+	size-4:(dkt:12.5rem, mob:auto),
+	size-5:(dkt:9.125rem, mob:7.5rem),
+	size-6:(dkt:8.75rem, mob:6.25rem),
+
+);
+@each $name, $value in $img-size{
+	.#{$name}{
+		height:map-get($value, dkt);		
+		@include max(767px){
+			height:map-get($value, mob);
+		}
+	}	
+}
+$classes:(
+	gr:$gray,
+	blc:$dgray,
+	wh:$white,
+	blu:$main
+);
+@each $co, $value in $classes{
+	.#{$co}{
+		color:$value;		
+	}
+}
+$displays:(
+	df:flex,
+	db:block,
+	dg:grid,
+	di:inline-block,
+	dt:table,
+	dif:inline-flex
+);
+@each $dis, $value in $displays{
+	.#{$dis}{
+		display: $value;
+	}
+}
+.wrapper{
+	max-width: 100%;
+	margin-left:auto;
+	margin-right:auto;
+	padding-left:2.5rem;
+	padding-right:2.5rem;
+	@include max(767px){
+		padding-left:1rem;
+		padding-right:1rem;
+	}
+}
+%btn{
+	display: inline-block;
+	color:$gray;	
+}
+.btn-main{
+	@extend %btn;
+	background-color: $main;
+	&:hover{
+		background-color:transparent;
+	}
+}
+.btn-ass{
+	@extend %btn;
+	background-color: $ass;
+}
+.dfc{
+	display: flex;	
+	flex-direction:column;
+}
+.dg{	
+	grid-template-columns: repeat(12,1fr);
+	#first &{
+		color:$ass;
+	}
+}
+.hide_on_mobile{
+	@include max(991px){
+		display: none;
+	}
+}
+.hide_on_desktop{
+	@include min(992px){
+		display: none;
+	}
+}
+img{	
+	vertical-align: middle;
+	max-width: 100%;
+}
+.mt80{
+	@include mgn(5rem 0 0);
+	@include max(767px){
+		@include mgn(2.5rem 0 0);
+	}
+}
+.img-outer{
+	overflow: hidden;
+	position: relative;
+	& img{
+		height:100%;
+		object-fit:cover;
+		@include transition(.3s ease-in-out all);
+		width: 100%;	
+	}
+	&:hover{
+		& img{
+			transform:scale(1.01);
+			@include transition(.3s ease-in-out all);
+		}
+	}
+}

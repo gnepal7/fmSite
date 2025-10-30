@@ -1,0 +1,78 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="Nepali FM Radio, News, Entertainment, Songs, RJ">
+	<meta name="keywords" content="FM Radio, news, world, politics, sports, entertainment">
+	<meta name="author" content="goodnewsfm">
+	<meta property="og:title" content="goodnewsfm">
+	<meta property="og:description" content="Nepali FM Radio, News, Entertainment, Songs, RJ">
+	<meta property="og:image" content="https://goodnewsfm.com.np/images/logo.png">
+	<meta property="og:url" content="https://budiganganews.com/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="GoodNewsFM">
+  <meta name="twitter:description" content="FM Radio, news, world, politics, sports, entertainment">
+  <meta name="twitter:image" content="https://goodnewsfm.com.np/images/logo.png">
+	<title>GoodNewsFM</title>
+
+	<!-- custom favicon -->
+	<link rel="icon" href="images/fav.png" type="image/png">
+
+	<!-- custom fonts -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/font-styles.css' %}">
+	<!-- owl-carousel -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.min.css' %}">
+	<!-- image gallery jquery lightbox -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/jquery.lightbox.min.css' %}">
+	<!-- custom -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/front.css' %}">
+</head>
+<body>
+	<script src="{% static 'js/jquery-3.5.0.min.js' %}"></script>
+	<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'js/jquery.lightbox.min.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
+
+	<header class="header">
+		<nav class="wrapper df nav">
+			<a class="logo" href="{% url 'home' %}">
+				<img src="{% static 'images/logo.png' %}" alt="logo">
+			</a>
+			<button class="nav_toggler">
+				<i class="cf cf-bars toggler"></i>
+			</button>
+			<ul class="nav_ul df">
+				<li class="nav_li">
+					<a class="nav_a active" href="index.html">Home</a>
+				</li>
+				<li class="nav_li">
+					<a class="nav_a" href="detail.html">About Us</a>
+				</li>
+				<li class="nav_li">
+					<a class="nav_a" href="news.html">News</a>
+				</li>
+				<li class="nav_li">
+					<a class="nav_a" href="team.html">Our Team</a>
+				</li>
+				<li class="nav_li">
+					<a class="nav_a" href="schedule.html">Schedule</a>
+				</li>
+				<li class="nav_li">
+					<a class="nav_a" href="archiev.html">Archiev</a>
+				</li>
+				<li class="nav_li">
+					<a class="nav_a" href="contact.html">Contact</a>
+				</li>
+			</ul>
+			<figure class="live dfc">
+				<figcaption>Listen Live</figcaption>
+				<audio controls>
+				  <source src="{% static 'audio/test.mp3' %}" type="audio/mpeg">
+				</audio>
+			</figure>
+		</nav>
+	</header>
