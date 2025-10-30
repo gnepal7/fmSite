@@ -3,7 +3,6 @@
 	background-color:$main;
 	position:relative;
 	z-index: 3;
-	overflow: hidden;
 	&.fixed{
 		position: fixed;
 		top:0;
@@ -115,10 +114,31 @@
 		@include max(991px){
 			width:100%;
 		}
+		&.drop,
+		&.with-drop{
+			position: relative;
+			&:before{
+				transition:all ease-in-out .5s;
+				content: "";
+				border-right:4px solid transparent;
+				border-left:4px solid transparent;
+				right:2px;
+				top: 1.4rem;
+				position: absolute;
+				border-top:4px solid $gray;
+				z-index: 1;
+			}
+		}
+		&.with-drop{
+			&:before{
+				transform:rotate(180deg);
+			}
+		}
 	}
 	&_a{
 		color:$white;
 		display: block;
+		padding:.5rem .9rem;
 		@include max(991px){
 			@include pad(.5rem 0);
 		}
@@ -148,6 +168,45 @@
 		}
 		@include max(399px){
 			width:100%;
+		}
+	}
+}
+
+.submnu{
+	display: none;
+	transition:all ease-in-out .5s;
+	position: relative;
+	&.show{
+		display: block;
+		transition:ease-in-out all .5s;
+    	border-bottom-left-radius: 5px;
+    	border-bottom-right-radius: 5px;
+    	@include min(992px){
+    		background-color: lighten($gray, 10%);
+    		position: absolute;
+    		left:0;
+    		top:100%;
+    		min-width: 9rem;
+    		box-shadow: 0 0 4px 0 rgba($dgray, .2);
+    	}
+	}
+	&_item{
+
+	}
+	&_link{
+		display: block;
+		padding:.3rem .7rem;
+		font-size: 1rem;
+		@include min(992px){
+			color:$dgray;
+		}
+		@include max(991px){
+			margin-left: 1rem;
+			color:$gray;
+		}
+		&:hover{
+			color:$ass;
+			transition:all ease-in-out .3s
 		}
 	}
 }

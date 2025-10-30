@@ -20,7 +20,7 @@
 	<title>GoodNewsFM</title>
 
 	<!-- custom favicon -->
-	<link rel="icon" href="images/fav.png" type="image/png">
+	<link rel="icon" href="images/fav.png" type="{% static 'image/png' %}">
 
 	<!-- custom fonts -->
 	<link rel="stylesheet" type="text/css" href="{% static 'css/font-styles.css' %}">
@@ -55,9 +55,17 @@
 				<li class="nav_li">
 					<a class="nav_a" href="news.html">News</a>
 				</li>
-				<li class="nav_li">
-					<a class="nav_a" href="team.html">Our Team</a>
-				</li>
+                <li class="nav_li drop"><a href="#" class="nav_a h5 db">Our Team</a>
+                    <ul class="submnu">
+                        <li class="submnu_item">
+                            <a href="team.html" class="submnu_link h6 db">Executive Team</a>
+                            <a href="team.html" class="submnu_link h6 db">Staffs</a>
+                            <a href="team.html" class="submnu_link h6 db">Board Members</a>
+                            <a href="team.html" class="submnu_link h6 db">Share Holders</a>
+                        </li>
+                    </ul>
+                </li>
+
 				<li class="nav_li">
 					<a class="nav_a" href="schedule.html">Schedule</a>
 				</li>

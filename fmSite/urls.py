@@ -27,3 +27,6 @@ urlpatterns = [
     path('', views.homePage, name='home')
 ]
 urlpatterns += static(settings.CABINET_MEDIA_URL, document_root=settings.CABINET_MEDIA_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
