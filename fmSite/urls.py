@@ -24,7 +24,11 @@ from fmSite import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.homePage, name='home')
+    path('', views.homePage, name='home'),
+    path('about', views.aboutPage, name='about'),
+    path('news', views.newsPage, name='news'),
+    path('news/<int:id>/', views.newsDetail, name='newsDetail'),
+    path('news/', views.news_list, name='news_list'),
 ]
 urlpatterns += static(settings.CABINET_MEDIA_URL, document_root=settings.CABINET_MEDIA_ROOT)
 

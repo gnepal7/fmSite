@@ -1,11 +1,23 @@
 from django.contrib import admin
 
 from .models import (
-    NewsPost, Page, TeamMember,
+    Gallery, GalleryImage, MediaFile, NewsPost, Page, SiteLogo, Slider, TeamMember,
     ProgramSchedule, ArchiveProgram, ContactMessage
 )
 
+admin.site.register(MediaFile)
+
 # fm/admin.py
+
+@admin.register(SiteLogo)
+class SiteLogoAdmin(admin.ModelAdmin):
+    list_display = ['logo']
+    fields = ['logo']
+
+    def has_add_permission(self, request):
+        # Allow only ONE instance
+        return not SiteLogo.objects.exists()
+
 @admin.register(NewsPost)
 class NewsPostAdmin(admin.ModelAdmin):
     list_display = ['title', 'published_at', 'is_published']
@@ -41,3 +53,18 @@ class ContactMessageAdmin(admin.ModelAdmin):
     list_display = ['name', 'email', 'submitted_at']
     readonly_fields = ['submitted_at']
     search_fields = ['name', 'email']
+
+@admin.register(Slider)
+class SliderAdmin(admin.ModelAdmin):
+    list_display = ['caption', 'image', 'order']  
+    list_editable = ['order']
+
+class GalleryImageInline(admin.TabularInline):
+    model = GalleryImage
+    extra = 1
+    fields = ['image', 'caption']
+
+@admin.register(Gallery)
+class GalleryAdmin(admin.ModelAdmin):
+    inlines = [GalleryImageInline]
+    list_display = ['title', 'created_at']

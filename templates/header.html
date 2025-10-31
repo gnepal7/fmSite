@@ -20,8 +20,7 @@
 	<title>GoodNewsFM</title>
 
 	<!-- custom favicon -->
-	<link rel="icon" href="images/fav.png" type="{% static 'image/png' %}">
-
+	<link rel="icon" href="{% static 'images/fav.png' %}" type="image/png">
 	<!-- custom fonts -->
 	<link rel="stylesheet" type="text/css" href="{% static 'css/font-styles.css' %}">
 	<!-- owl-carousel -->
@@ -40,20 +39,26 @@
 	<header class="header">
 		<nav class="wrapper df nav">
 			<a class="logo" href="{% url 'home' %}">
-				<img src="{% static 'images/logo.png' %}" alt="logo">
+				{% with logo=site_logo.logo %}
+					{% if logo %}
+						<img src="{{ logo.file.url }}" alt="Site Logo" class="logo">
+					{% else %}
+						<img src="{% static 'images/fav.png' %}" alt="Default Logo" class="logo">
+					{% endif %}
+				{% endwith %}
 			</a>
 			<button class="nav_toggler">
 				<i class="cf cf-bars toggler"></i>
 			</button>
 			<ul class="nav_ul df">
 				<li class="nav_li">
-					<a class="nav_a active" href="index.html">Home</a>
+					<a class="nav_a {% if request.path == '/' %}active{% endif %}" href="{% url 'home' %}">Home</a>
 				</li>
 				<li class="nav_li">
-					<a class="nav_a" href="detail.html">About Us</a>
+					<a class="nav_a {% if request.path == '/about' %}active{% endif %}" href="{% url 'about' %}">About Us</a>
 				</li>
 				<li class="nav_li">
-					<a class="nav_a" href="news.html">News</a>
+					<a class="nav_a {% if request.path == '/news' %}active{% endif %}" href="{% url 'news' %}">News</a>
 				</li>
                 <li class="nav_li drop"><a href="#" class="nav_a h5 db">Our Team</a>
                     <ul class="submnu">

@@ -3,53 +3,40 @@
 
 {% block content %}
 <section class="banner owl-carousel owl-theme">
-	<div class="slider item dfc" style="background:url('static/images/woman.jpg');">
-		<h1 class="banner_title">Provide correct information to people is our duty.</h1>
-	</div>
-	<div class="slider item dfc" style="background:url('static/images/studio1.jpg');">
-		<h1 class="banner_title">Banner Title2</h1>
-	</div>
-	<div class="slider item dfc" style="background:url('static/images/studio2.jpg');">
-		<h1 class="banner_title">Banner Title2</h1>
-	</div>
+	{% for sl in sliderItems %}
+		<div class="slider item dfc" style="background:url('{{ sl.image.file.url }}');">
+			{% if sl.caption %}
+				<h1 class="banner_title">{{sl.caption}}</h1>
+			{% endif %}
+		</div>
+	{% endfor %}
 </section>
 
 <div class="wrapper dg news-outer mt80">
 	<div class="col_4">
 		<aside class="intro dfc">
-			<h3 class="intro_title">Introduction of GOOD NEWS FM 105.1MHZ</h3>
-			<img src="{% static 'images/rj.jpg' %}" alt="rj">
-			<p>Christian Community of Nepal had been praying for a Christian Media for a couple</p>
-			<a class="btn btn-main btn-detail" href="#">Detail</a>
+			<h3 class="intro_title">{{ aboutUs.title }}</h3>
+			{% if aboutUs.image %}
+				<img src="{{ aboutUs.image.file.url }}" alt="{{ aboutUs.title }}">
+			{% endif %}
+			<p>{{ aboutUs.content|striptags|truncatechars:110 }}</p>
+			<a class="btn btn-main btn-detail" href="{% url 'about' %}">Detail</a>
 		</aside>
 	</div>
 	<div class="col_8 news_wrap">
-		<a class="bl-title" href="#">News</a>
+		<a class="bl-title" href="{% url 'news' %}">News</a>
 		<div class="dg news">
-			<a class="news_item col_6 df" href="#">
-				<img src="{% static 'images/jhor.jpg' %}" alt="jhor">
-				<h5 class="news_title">मलेशियाको जोहरमा तीन दिने सम्मेलन सम्पन्न</h5>
+			{% for ni in news %}
+			<a class="news_item col_6 df" href="{% url 'newsDetail' ni.id">
+				{% if ni.image %}
+					<img src="{{ ni.image.file.url }}" alt="{{ ni.title }}">
+				{% else %}
+					<img src="{% static 'images/default.jpg' %}" alt="{{ ni.title }}">
+				{% endif %}
+				<h5 class="news_title">{{ni.title}}</h5>
 			</a>
-			<a class="news_item col_6 df" href="#">
-				<img src="{% static 'images/bhat.jpg' %}" alt="bhat">
-				<h5 class="news_title">डा.भट्टराईले भने-'आस्था विपरीत राज्यले विभेद गरे अधिकारको पक्षमा उभिनेछु'</h5>
-			</a>
-			<a class="news_item col_6 df" href="#">
-				<img src="{% static 'images/yuva.jpeg' %}" alt="yuba">
-				<h5 class="news_title">यूवा शिखर सम्मेलन सकियो</h5>
-			</a>
-			<a class="news_item col_6 df" href="#">
-				<img src="{% static 'images/aasa.jpg' %}" alt="aasa">
-				<h5 class="news_title">आशाको सन्देश नेपालको दशौं वार्षिकोत्सव सम्पन्न</h5>
-			</a>
-			<a class="news_item col_6 df" href="#">
-				<img src="{% static 'images/bhat.jpg' %}" alt="bhat">
-				<h5 class="news_title">डा.भट्टराईले भने-'आस्था विपरीत राज्यले विभेद गरे अधिकारको पक्षमा उभिनेछु'</h5>
-			</a>
-			<a class="news_item col_6 df" href="#">
-				<img src="{% static 'images/aasa.jpg' %}" alt="aasa">
-				<h5 class="news_title">आशाको सन्देश नेपालको दशौं वार्षिकोत्सव सम्पन्न</h5>
-			</a>
+			{% endfor %}
+			
 		</div>
 	</div>
 </div>
