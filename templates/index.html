@@ -26,14 +26,14 @@
 	<div class="col_8 news_wrap">
 		<a class="bl-title" href="{% url 'news' %}">News</a>
 		<div class="dg news">
-			{% for ni in news %}
-			<a class="news_item col_6 df" href="{% url 'newsDetail' ni.id">
-				{% if ni.image %}
-					<img src="{{ ni.image.file.url }}" alt="{{ ni.title }}">
+			{% for n in news %}
+			<a class="news_item col_6 df" href="{% url 'newsDetail' n.id %}">
+				{% if n.image %}
+					<img src="{{ n.image.file.url }}" alt="{{ n.title }}">
 				{% else %}
-					<img src="{% static 'images/default.jpg' %}" alt="{{ ni.title }}">
+					<img src="{% static 'images/default.jpg' %}" alt="{{ n.title }}">
 				{% endif %}
-				<h5 class="news_title">{{ni.title}}</h5>
+				<h5 class="news_title">{{n.title}}</h5>
 			</a>
 			{% endfor %}
 			
@@ -41,40 +41,31 @@
 	</div>
 </div>
 
-
 <div class="wrapper mt80">
-	<a class="bl-title" href="#">Archiev</a>
+	<a class="bl-title" href="{% url 'archiev' %}">Archiev</a>
 	<div class="dg archiev">
-		<a class="archiev_item col_4 df" href="#">
-			<aside class="archiev_name dfc">
-				<figure class="df archiev_sign df">
-					<i class="cf cf-volume-up"></i> |
-					<time>18-04-2080</time>
-				</figure>
-				<h6 class="archiev_title">Sermon/Words of God</h6>
-			</aside>
-			<img class="archiev_img" src="{% static 'images/proj1.jpg' %}" alt="proj1">
-		</a>
-		<a class="archiev_item col_4 df" href="#">
-			<aside class="archiev_name dfc">
-				<figure class="df archiev_sign df">
-					<i class="cf cf-volume-up"></i> |
-					<time>18-04-2080</time>
-				</figure>
-				<h6 class="archiev_title">Life Changing Testimony</h6>
-			</aside>
-			<img class="archiev_img" src="{% static 'images/proj2.jpg' %}" alt="proj2">
-		</a>
-		<a class="archiev_item col_4 df" href="#">
-			<aside class="archiev_name dfc">
-				<figure class="df archiev_sign df">
-					<i class="cf cf-volume-up"></i> |
-					<time>18-04-2080</time>
-				</figure>
-				<h6 class="archiev_title">Manko Pida</h6>
-			</aside>
-			<img class="archiev_img" src="{% static 'images/proj3.jpg' %}" alt="proj3">
-		</a>
+
+		{% for p in programs %}
+			<article class="archiev_item col_4 df">
+				<aside class="archiev_name dfc on_homepage">
+					<figure class="df archiev_sign df">
+						<i class="cf cf-volume-up"></i> |
+						<time>{{ p.broadcast_date|date:"d M Y" }}</time>
+					</figure>
+					{% if p.audio_file %}
+					<audio controls>
+						<source src="{{ p.audio_file.file.url }}" type="audio/mpeg">
+						Your browser does not support audio.
+					</audio>
+					{% endif %}
+					<h6 class="archiev_title">{{ p.program_name }}</h6>
+				</aside>
+				{% if p.featured_image %}
+					<img src="{{ p.featured_image.file.url }}" alt="{{ p.program_name }}" width="200">
+				{% endif %}
+			</article>
+		{% endfor %}
+
 	</div>
 </div>
 

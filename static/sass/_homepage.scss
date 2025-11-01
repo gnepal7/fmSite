@@ -141,6 +141,12 @@
 		@include max(767px){
 			@include pad(.5rem);
 		}
+		&.on_homepage{
+			& audio{
+				max-width:11rem;
+			}
+		}
+		
 	}
 	&_title{
 		color:$white;

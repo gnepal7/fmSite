@@ -891,6 +891,9 @@ img {
     padding: 0.5rem;
   }
 }
+.archiev_name.on_homepage audio {
+  max-width: 11rem;
+}
 .archiev_title {
   color: #ffffff;
 }
@@ -1155,8 +1158,8 @@ img {
   color: #ffffff;
   background-color: #2E3094;
 }
-.page-numbers:not(:last-of-type), .page-numbers.current {
-  margin: 0 0.5rem 0 0;
+.page-numbers, .page-numbers.current, .page-numbersspan.page-numbers {
+  margin-right: .5rem;
 }
 
 .detail {

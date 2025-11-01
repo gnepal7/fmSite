@@ -75,7 +75,7 @@
 					<a class="nav_a" href="schedule.html">Schedule</a>
 				</li>
 				<li class="nav_li">
-					<a class="nav_a" href="archiev.html">Archiev</a>
+					<a class="nav_a {% if request.path == '/archiev' %}active{% endif %}" href="{% url 'archiev' %}">Archiev</a>
 				</li>
 				<li class="nav_li">
 					<a class="nav_a" href="contact.html">Contact</a>
