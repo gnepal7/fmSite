@@ -81,6 +81,9 @@
 			}
 			&.ui-state-active{
 				background-color:$main !important; 
+				& a{
+					color:$white;
+				}
 			}
 			&:not(:last-of-type){
 				margin-right: .5rem !important;
@@ -88,6 +91,7 @@
 		}
 		& a{
 			padding:.5rem !important;
+			display:block;
 		}
 	}
 	&_content{

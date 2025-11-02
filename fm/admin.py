@@ -1,5 +1,7 @@
 from django.contrib import admin
 
+from fm.forms import ProgramScheduleForm
+
 from .models import (
     Gallery, GalleryImage, MediaFile, NewsPost, Page, SiteLogo, Slider, TeamMember,
     ProgramSchedule, ArchiveProgram, ContactMessage
@@ -41,6 +43,7 @@ class TeamMemberAdmin(admin.ModelAdmin):
 class ProgramScheduleAdmin(admin.ModelAdmin):
     list_display = ['program_name', 'get_day_display', 'start_time', 'end_time']
     list_filter = ['day']
+    form = ProgramScheduleForm
 
 @admin.register(ArchiveProgram)
 class ArchiveProgramAdmin(admin.ModelAdmin):

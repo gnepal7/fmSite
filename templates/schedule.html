@@ -1,232 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="description" content="Nepali FM Radio, News, Entertainment, Songs, RJ">
-	<meta name="keywords" content="FM Radio, news, world, politics, sports, entertainment">
-	<meta name="author" content="goodnewsfm">
-	<meta property="og:title" content="goodnewsfm">
-	<meta property="og:description" content="Nepali FM Radio, News, Entertainment, Songs, RJ">
-	<meta property="og:image" content="https://goodnewsfm.com.np/images/logo.png">
-	<meta property="og:url" content="https://budiganganews.com/">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="GoodNewsFM">
-  <meta name="twitter:description" content="FM Radio, news, world, politics, sports, entertainment">
-  <meta name="twitter:image" content="https://goodnewsfm.com.np/images/logo.png">
-	<title>GoodNewsFM</title>
+{% extends 'base.html' %}
+{% load static %}
 
-	<!-- custom favicon -->
-	<link rel="icon" href="images/fav.png" type="image/png">
+{% block content %}
 
-	<!-- custom fonts -->	
-	<link rel="stylesheet" type="text/css" href="css/font-styles.css">		
-	<!-- owl-carousel -->
-	<link rel="stylesheet" type="text/css" href="css/owl.carousel.min.css">	
-	<!-- jqueryui -->
-	<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
-	<!-- custom -->
-	<link rel="stylesheet" type="text/css" href="css/front.css">
-</head>
-<body>
-	<script src="js/jquery-3.5.0.min.js"></script>			
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/jquery-ui.min.js"></script>
-	<script src="js/main.js"></script>
+<div class="wrapper mt80 program_schedule">
+	<h5 class="bl-title">Program Schedule</h5>
 
-	<header class="header">
-		<nav class="wrapper df nav">
-			<a class="logo" href="index.html">
-				<img src="images/logo.png" alt="logo">
-			</a>
-			<button class="nav_toggler">
-				<i class="cf cf-bars toggler"></i>				   
-			</button>
-			<ul class="nav_ul df">
-				<li class="nav_li">
-					<a class="nav_a" href="index.html">Home</a>
+	<div id="proj-sch" class="dg schedule">
+		<ul class="schedule_tab col_12 df">
+			{% for day in days %}
+			<li><a href="#{{ day }}">{{ day }}</a></li>
+			{% endfor %}
+		</ul>
+
+		{% for day in days %}
+		<div id="{{ day }}" class="schedule_content col_12">
+			<ul class="schedule_ul dfc">
+				{% for s in schedule %}
+				{% if s.get_day_display == day %}
+				<li class="schedule_li">
+					<strong>{{ s.program_name }}</strong>
+					<span>{{ s.start_time|time:"H:i" }} - {{ s.end_time|time:"H:i" }}</span>
 				</li>
-				<li class="nav_li">
-					<a class="nav_a" href="detail.html">About Us</a>
+				{% endif %}
+				{% empty %}
+				<li class="schedule_li">
+					<span>No programs found.</span>
 				</li>
-				<li class="nav_li">
-					<a class="nav_a" href="news.html">News</a>
-				</li>
-				<li class="nav_li">
-					<a class="nav_a" href="team.html">Our Team</a>
-				</li>
-				<li class="nav_li">
-					<a class="nav_a active" href="schedule.html">Schedule</a>
-				</li>
-				<li class="nav_li">
-					<a class="nav_a" href="archiev.html">Archiev</a>
-				</li>
-				<li class="nav_li">
-					<a class="nav_a" href="request-zone.html">Request-Zone</a>
-				</li>
-				<li class="nav_li">
-					<a class="nav_a" href="contact.html">Contact</a>
-				</li>
+				{% endfor %}
 			</ul>
-			<figure class="live dfc">
-				<figcaption>Listen Live</figcaption>
-				<audio controls>
-				  <source src="audio/test.mp3" type="audio/mpeg">
-				</audio>
-			</figure>
-		</nav>
-	</header>
-
-
-	
-	<div class="wrapper mt80">
-		<h5 class="bl-title" href="#">Program Schedule</h5>
-		
-		<div id="proj-sch" class="dg schedule">
-		  <ul class="schedule_tab col_12 df">
-		    <li><a href="#Sunday">Sunday</a></li>
-		    <li><a href="#monday">Monday</a></li>
-		    <li><a href="#tuesday">Tuesday</a></li>
-		    <li><a href="#wednesday">Wednesday</a></li>
-		    <li><a href="#thursday">Thursday</a></li>
-		    <li><a href="#friday">Friday</a></li>
-		    <li><a href="#saturday">Saturday</a></li>
-		  </ul>
-		  <div id="Sunday" class="schedule_content col_12">
-		    <ul class="schedule_ul dfc">
-		    	<li class="schedule_li">
-		    		<strong>ON AIR</strong>
-		    		<span>05:55 - 06:10</span>
-		    	</li>
-		    	<li class="schedule_li">
-		    		<strong>Jeewan Ko Roti</strong>
-		    		<span>06:05 - 06:50</span>
-		    	</li>
-		    	<li class="schedule_li">
-		    		<strong>Aaja ko Bachan</strong>
-		    		<span>06:50 - 06:55</span>
-		    	</li>
-		    	<li class="schedule_li">
-		    		<strong>Dhanyabad Bihani</strong>
-		    		<span>06:55 - 07:00</span>
-		    	</li>
-		    	<li class="schedule_li">
-		    		<strong>Prayer Tower</strong>
-		    		<span>07:00 - 07:30</span>
-		    	</li>
-		    	<li class="schedule_li">
-		    		<strong>Aatmik Jagaran</strong>
-		    		<span>07:30 - 08:00</span>
-		    	</li>
-		    </ul>
-		  </div>
-		  <div id="monday" class="schedule_content col_12">
-		    <ul class="schedule_ul dfc">
-		    	<li class="schedule_li">
-		    		<strong>Monday Program1</strong>
-		    		<span>05:55 - 06:10</span>
-		    	</li>
-		    </ul>
-		  </div>
-		  <div id="tuesday" class="schedule_content col_12">
-		    <ul class="schedule_ul dfc">
-		    	<li class="schedule_li">
-		    		<strong>Tuesday Program1</strong>
-		    		<span>05:55 - 06:10</span>
-		    	</li>
-		    </ul>
-		  </div>
-		  <div id="wednesday" class="schedule_content col_12">
-		    <ul class="schedule_ul dfc">
-		    	<li class="schedule_li">
-		    		<strong>Wednesday Program1</strong>
-		    		<span>05:55 - 06:10</span>
-		    	</li>
-		    </ul>
-		  </div>
-		  <div id="thursday" class="schedule_content col_12">
-		    <ul class="schedule_ul dfc">
-		    	<li class="schedule_li">
-		    		<strong>Thursday Program1</strong>
-		    		<span>05:55 - 06:10</span>
-		    	</li>
-		    </ul>
-		  </div>
-		  <div id="friday" class="schedule_content col_12">
-		    <ul class="schedule_ul dfc">
-		    	<li class="schedule_li">
-		    		<strong>Friday Program1</strong>
-		    		<span>05:55 - 06:10</span>
-		    	</li>
-		    </ul>
-		  </div>
-		  <div id="saturday" class="schedule_content col_12">
-		    <ul class="schedule_ul dfc">
-		    	<li class="schedule_li">
-		    		<strong>Saturday Program1</strong>
-		    		<span>05:55 - 06:10</span>
-		    	</li>
-		    </ul>
-		  </div>
 		</div>
-	</div>	
+		{% endfor %}
+	</div>
 
-	<footer class="footer mt80">
-		<div class="wrapper dg inner">
-			<div class="col_4">
-				<h3 class="footer_title">Short Navigation</h3>
-				<ul class="footer_ul">
-					<li class="footer_li litem">
-						<a class="footer_a active" href="#">Home</a>
-					</li>
-					<li class="footer_li litem">
-						<a class="footer_a" href="#">About Us</a>
-					</li>
-					<li class="footer_li litem">
-						<a class="footer_a" href="#">News</a>
-					</li>
-					<li class="footer_li litem">
-						<a class="footer_a" href="#">Our Team</a>
-					</li>
-					<li class="footer_li litem">
-						<a class="footer_a" href="#">Schedule</a>
-					</li>
-					<li class="footer_li litem">
-						<a class="footer_a" href="#">Archiev</a>
-					</li>
-					<li class="footer_li litem">
-						<a class="footer_a" href="#">Gallery</a>
-					</li>
-					<li class="footer_li litem">
-						<a class="footer_a" href="#">Request-Zone</a>
-					</li>
-					<li class="footer_li litem">
-						<a class="footer_a" href="#">Contact</a>
-					</li>
-				</ul>
-			</div>
-			<div class="col_4">
-				<ul class="footer_ul df">
-					<li class="footer_li">
-						<a class="footer_a" href="#"><i class="cf cf-facebook-square footicon"></i></a>
-					</li>
-					<li class="footer_li">
-						<a class="footer_a" href="#"><i class="cf cf-skype footicon"></i></a>
-					</li>
-					<li class="footer_li">
-						<a class="footer_a" href="#"><i class="cf cf-twitter-square footicon"></i></a>
-					</li>
-					<li class="footer_li">
-						<a class="footer_a" href="#"><i class="cf cf-youtube-square footicon"></i></a>
-					</li>
-				</ul>
-				<p class="copyright">Copyright © 2029 Good News FM 105.1 MHz. All Rights Reserved</p>
-			</div>
-			<div class="col_4">
-				<h4>place for facebook likebox.(height:should be max 230px )</h4>
-			</div>
-		</div>
-	</footer>
-</body>
-</html>
+</div>
+
+{% endblock %}

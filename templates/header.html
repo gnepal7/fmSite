@@ -32,6 +32,7 @@
 </head>
 <body>
 	<script src="{% static 'js/jquery-3.5.0.min.js' %}"></script>
+	<script src="{% static 'js/jquery-ui.min.js' %}"></script>
 	<script src="{% static 'js/owl.carousel.min.js' %}"></script>
 	<script src="{% static 'js/jquery.lightbox.min.js' %}"></script>
 	<script src="{% static 'js/main.js' %}"></script>
@@ -60,19 +61,19 @@
 				<li class="nav_li">
 					<a class="nav_a {% if request.path == '/news' %}active{% endif %}" href="{% url 'news' %}">News</a>
 				</li>
-                <li class="nav_li drop"><a href="#" class="nav_a h5 db">Our Team</a>
+                <li class="nav_li drop"><a href="#" class="nav_a h5 db {% if request.path == '/team' %}active{% endif %}">Our Team</a>
                     <ul class="submnu">
                         <li class="submnu_item">
-                            <a href="team.html" class="submnu_link h6 db">Executive Team</a>
-                            <a href="team.html" class="submnu_link h6 db">Staffs</a>
-                            <a href="team.html" class="submnu_link h6 db">Board Members</a>
-                            <a href="team.html" class="submnu_link h6 db">Share Holders</a>
+                            <a href="{% url 'team' 'executive' %}" class="submnu_link h6 db">Executive Team</a>
+                            <a href="{% url 'team' 'staff' %}" class="submnu_link h6 db">Staffs</a>
+                            <a href="{% url 'team' 'board' %}" class="submnu_link h6 db">Board Members</a>
+                            <a href="{% url 'team' 'shareholder' %}" class="submnu_link h6 db">Share Holders</a>
                         </li>
                     </ul>
                 </li>
 
 				<li class="nav_li">
-					<a class="nav_a" href="schedule.html">Schedule</a>
+					<a class="nav_a {% if request.path == '/program-schedule' %}active{% endif %}" href="{% url 'program-schedule' %}">Schedule</a>
 				</li>
 				<li class="nav_li">
 					<a class="nav_a {% if request.path == '/archiev' %}active{% endif %}" href="{% url 'archiev' %}">Archiev</a>

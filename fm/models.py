@@ -1,4 +1,5 @@
 # fm/models.py
+import datetime
 from django.db import models
 from tinymce.models import HTMLField
 from django.utils import timezone
@@ -69,10 +70,24 @@ class TeamMember(models.Model):
         return f"{self.name} - {self.designation}"
 
 # 4. Program Schedule (Daily, 7 days)
+# class ProgramSchedule(models.Model):
+#     DAYS = [(i, timezone.now().replace(day=i).strftime('%A')) for i in range(1, 8)]
+#     day = models.IntegerField(choices=DAYS)  # 1=Mon, ..., 7=Sun
+#     program_name = models.CharField(max_length=200)
+#     start_time = models.TimeField()
+#     end_time = models.TimeField()
+
+#     class Meta:
+#         unique_together = ('day', 'start_time', 'program_name')
+#         ordering = ['day', 'start_time']
+
+#     def __str__(self):
+#         return f"{self.program_name} ({self.get_day_display()})"
+    
 class ProgramSchedule(models.Model):
     DAYS = [(i, timezone.now().replace(day=i).strftime('%A')) for i in range(1, 8)]
-    day = models.IntegerField(choices=DAYS)  # 1=Mon, ..., 7=Sun
-    program_name = models.CharField(max_length=200)
+    day = models.IntegerField(choices=DAYS)
+    program_name = models.CharField(max_length=200)    
     start_time = models.TimeField()
     end_time = models.TimeField()
 
@@ -82,6 +97,11 @@ class ProgramSchedule(models.Model):
 
     def __str__(self):
         return f"{self.program_name} ({self.get_day_display()})"
+
+    def duration(self):
+        delta = datetime.datetime.combine(datetime.date.min, self.end_time) - \
+                datetime.datetime.combine(datetime.date.min, self.start_time)
+        return int(delta.total_seconds() // 60)
 
 # 5. Archive Audio Programs
 class ArchiveProgram(models.Model):

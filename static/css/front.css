@@ -894,6 +894,9 @@ img {
 .archiev_name.on_homepage audio {
   max-width: 11rem;
 }
+.archiev img {
+  object-fit: cover;
+}
 .archiev_title {
   color: #ffffff;
 }
@@ -1131,6 +1134,14 @@ img {
   width: 55%;
   flex: 1;
 }
+.listing.archiev .archiev_item .archiev_name {
+  flex: 1;
+}
+@media (max-width: 767px) {
+  .listing.archiev .archiev_item img {
+    flex: 1;
+  }
+}
 
 .paginate {
   margin-top: 1.5rem;
@@ -1237,11 +1248,15 @@ img {
 .schedule_tab li.ui-state-active {
   background-color: #2E3094 !important;
 }
+.schedule_tab li.ui-state-active a {
+  color: #ffffff;
+}
 .schedule_tab li:not(:last-of-type) {
   margin-right: .5rem !important;
 }
 .schedule_tab a {
   padding: .5rem !important;
+  display: block;
 }
 .schedule_content {
   padding: 1rem 0 0 !important;

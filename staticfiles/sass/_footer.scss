@@ -1,0 +1,49 @@
+.footer{
+	background-color:$main;
+	@include mgn(5rem 0 0);
+	@include pad(2rem 0);
+	@include max(767px){
+		@include mgn(2.5rem 0 0);
+	}
+	color:$white;
+	& .inner{
+		@include gap(2.5rem);
+		@include max(767px){
+			@include gap(1.5rem);
+		}
+	}
+	&_title{
+		@include mgn(0 0 .6rem);
+	}
+	&_ul{
+		@include gap(.6rem);
+		@include min(768px){
+			column-count: 2;
+		}
+	}
+	&_li{
+		&.litem{
+			flex:0 0 calc( 50% - .3rem );
+			@include pad(.5rem 0);
+		}
+	}
+	&_a{
+		color:$white;
+		font-family: $font-body;
+		display: block;
+		&.active,
+		&:hover{
+			color:darken($gray, 10%);
+		}
+		& .footicon{
+			color:$gray;
+			font-size:1.3rem;
+		}
+	}
+	& .copyright{
+		@include mgn(1rem 0 0);
+		@include pad(1rem 0 0);
+		border-top:1px solid lighten($main, 10%);
+		font-size: .875rem;
+	}
+}

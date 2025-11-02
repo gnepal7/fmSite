@@ -32,6 +32,8 @@ urlpatterns = [
     path('news/<int:id>/', views.newsDetail, name='newsDetail'),
     path('archiev/', views.archievPage, name='archiev'),
     path('program/<int:id>/', views.program_detail, name='program_detail'),
+    path('team/<str:category>/', views.teamPage, name='team'),
+    path('program-schedule/', views.programSchedulePage, name='program-schedule')
     
 ]
 urlpatterns += static(settings.CABINET_MEDIA_URL, document_root=settings.CABINET_MEDIA_ROOT)

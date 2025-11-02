@@ -1,0 +1,212 @@
+.header{
+	@include pad(.625rem 0);
+	background-color:$main;
+	position:relative;
+	z-index: 3;
+	&.fixed{
+		position: fixed;
+		top:0;
+		right:0;
+		left:0;
+		box-shadow: 1px 1px 5px 1px rgba($dgray, .3);
+		border:0;
+		@include max(991px){			
+			border-top-width: 0;
+			border-bottom-width: 2px;
+		}
+	}
+	&:before,
+	&:after{
+		content:"";
+		position: absolute;
+		z-index: -1;
+	}
+	&:before{
+		@include min(992px){
+			width:.6rem;
+			height: calc( 100% + 6px );
+			background-color:$white;
+			left:15%;
+			transform:rotate(10deg);
+			top:-3px;
+		}
+	}	
+	&:after{		 
+		right:0;
+		background-color:$ass;
+		@include min(992px){
+			top:0;
+			height:100%;
+			width:16rem;
+		}
+		@include max(991px){
+			left:0;
+			height:5rem;
+			bottom:0;
+		}
+	}
+	& .logo{
+		@include max(991px){
+			align-self: flex-start;
+		}
+	}
+	
+}
+.nav{
+	@include gap(2.5rem);
+	align-items: center;
+	justify-content: space-between;
+	position:relative;
+	@include break(992px, 1199px){
+		@include gap(1.7rem)
+	}
+	@include max(991px){
+		@include gap(1rem);
+		flex-direction: column;
+	}
+	
+	&_toggler{
+		@include min(992px){
+			display: none;
+		}
+		position: absolute;
+		right:1rem;
+		border:0;
+		outline: none;
+		box-shadow:none;
+		font-size: 2rem;
+		background-color:transparent;
+		color:$white;
+		cursor: pointer;
+		top: 1.8rem;
+		&:focus{
+			outline: none;
+			box-shadow: none;
+		}	
+	}
+	&_ul{
+		@include gap(1.5rem);
+		@include break(992px, 1199px){
+			@include gap(.7rem)
+		}
+		@include max(991px){
+			width:15rem;
+			flex-direction:column;
+			left:-15rem;
+			bottom:-100%;
+			height:100%;
+			position: fixed;
+			align-items:flex-start;	
+			z-index: 3;	
+			grid-gap:.3rem;
+		}
+		&.on_mobile{			
+			background-color: $main;
+			left:0;
+			bottom:0;
+			transition:all ease-in-out .5s;
+			padding-top: 2rem;	
+			overflow-y:auto;	
+			padding-left:1rem;						
+		}
+	}
+	&_li{
+		@include max(991px){
+			width:100%;
+		}
+		&.drop,
+		&.with-drop{
+			position: relative;
+			&:before{
+				transition:all ease-in-out .5s;
+				content: "";
+				border-right:4px solid transparent;
+				border-left:4px solid transparent;
+				right:2px;
+				top: 1.4rem;
+				position: absolute;
+				border-top:4px solid $gray;
+				z-index: 1;
+			}
+		}
+		&.with-drop{
+			&:before{
+				transform:rotate(180deg);
+			}
+		}
+	}
+	&_a{
+		color:$white;
+		display: block;
+		padding:.5rem .9rem;
+		@include max(991px){
+			@include pad(.5rem 0);
+		}
+		&.active,
+		&:hover{
+			color:darken($gray, 10%);
+			@include min(992px){
+				border-bottom:1px solid darken($gray, 10%);
+			}
+		}
+	}
+}
+.live{
+	color: $white;
+	text-transform:uppercase;
+	@include gap(.3rem);
+	@include max(991px){
+		align-self: flex-start;
+		width:100%;
+		padding-top:.5rem;
+	}
+	& audio {
+		width:11rem;
+		height:2rem;
+		@include break(400px, 767px){
+			width:70%;
+		}
+		@include max(399px){
+			width:100%;
+		}
+	}
+}
+
+.submnu{
+	display: none;
+	transition:all ease-in-out .5s;
+	position: relative;
+	&.show{
+		display: block;
+		transition:ease-in-out all .5s;
+    	border-bottom-left-radius: 5px;
+    	border-bottom-right-radius: 5px;
+    	@include min(992px){
+    		background-color: lighten($gray, 10%);
+    		position: absolute;
+    		left:0;
+    		top:100%;
+    		min-width: 9rem;
+    		box-shadow: 0 0 4px 0 rgba($dgray, .2);
+    	}
+	}
+	&_item{
+
+	}
+	&_link{
+		display: block;
+		padding:.3rem .7rem;
+		font-size: 1rem;
+		@include min(992px){
+			color:$dgray;
+		}
+		@include max(991px){
+			margin-left: 1rem;
+			color:$gray;
+		}
+		&:hover{
+			color:$ass;
+			transition:all ease-in-out .3s
+		}
+	}
+}

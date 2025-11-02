@@ -1,0 +1,140 @@
+.detail{
+	@include gap(2rem);
+	& .archiev{
+		& .audio{
+			&-wrap{
+				@include mgn(.5rem auto 1rem);
+				@include gap(.7rem);
+				border-bottom:1px solid darken($light, 20%);
+				& audio{
+					width:100%;
+				}
+				& time{
+					font-size:1.4rem;
+					text-transform: uppercase;
+				}
+			}
+			&_ul{
+				@include gap(.7rem);
+			}
+			&_li{
+
+			}
+			&_a{
+				@include pad(.5rem 1rem);
+				display: block;
+				@include radius(.5rem);
+				background-color:$light;
+				&:hover{
+					color:$ass;
+				}
+			}
+		}
+	}
+	& .title{
+		text-transform: capitalize;
+		@include mgn(0 0 .7rem);
+	}
+	& .content{
+		@include gap(.7rem);
+		font-size:1.2rem;
+		& .img-outer{
+			@include radius(.7rem);
+		}
+		& h1,
+		& h2,
+		& h3,
+		& h4,
+		& h5,
+		& h6{
+			
+		}
+		
+	}
+
+}
+/***** program Schedule *****/
+#proj-sch{
+	border:0;
+	@include pad(1rem);
+	background-color:$light;
+}
+.schedule{	
+	&_tab{				
+		border:0;
+		padding:0 !important;
+		background-color: transparent;
+		@include max(767px){		
+			white-space: nowrap;
+			overflow-x:auto;
+			overflow-y:hidden;
+			padding-bottom:1rem !important;
+		}
+		& li{
+			background:$white !important;
+			border-radius: 0.3rem;
+			&,
+			&.ui-tabs-active{
+				margin:0 !important;
+				padding:0 !important;
+				border:0 !important;
+			}
+			&.ui-state-active{
+				background-color:$main !important; 
+			}
+			&:not(:last-of-type){
+				margin-right: .5rem !important;
+			}
+		}
+		& a{
+			padding:.5rem !important;
+		}
+	}
+	&_content{
+		padding:1rem 0 0 !important;
+	}
+	&_ul{
+		@include gap(.5rem);
+	}
+	&_li{
+		display: flex;
+		justify-content: space-between;
+		padding-top:.5rem;
+		padding-bottom:.5rem;
+		font-size:.9rem;
+		@include min(768px){
+			padding-left:1rem;
+			padding-right:1rem;
+			background-color: lighten($main, 60%);
+			@include radius(.5rem);
+		}		
+		&:not(:last-of-type){
+			@include max(767px){
+				border-bottom:1px solid lighten($main, 55%);
+			}
+		}
+	}
+}
+.form{
+	@include gap(1rem);
+	&-group{
+
+	}
+	&-input{
+		@include pad(1rem);
+		@include radius(.3rem);
+		border:1px solid darken($light, 10%);
+		@include transition(all ease-in-out .3s);
+		&:focus{
+			outline: none;
+			box-shadow: none;
+		}
+		&:focus,
+		&:hover{
+			border-color:$ass;
+		}
+	}
+	& textarea{
+		resize:none;
+	}
+}

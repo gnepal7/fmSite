@@ -3,7 +3,7 @@ from django.core.paginator import Paginator
 
 from django.db.models import Max
 from fm import models
-from fm.models import ArchiveProgram, Page, Slider, NewsPost, Gallery
+from fm.models import ArchiveProgram, Page, ProgramSchedule, Slider, NewsPost, Gallery, TeamMember
 
 def homePage(request):
     sliders = Slider.objects.all().order_by('order', '-id')
@@ -42,11 +42,10 @@ def archievPage(request):
     archievPrograms = ArchiveProgram.objects.values('program_name') \
         .annotate(latest_id=Max('id')) \
         .values_list('latest_id', flat=True)
-
     programs = ArchiveProgram.objects.filter(id__in=archievPrograms) \
         .order_by('-broadcast_date')
     # ap = archievPrograms[0] if archievPrograms else None  
-    paginator = Paginator(programs, 2)  
+    paginator = Paginator(programs, 5)  
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request, 'archiev.html', {'page_obj': page_obj})
@@ -59,4 +58,32 @@ def program_detail(request, id):
     return render(request, 'archiev-detail.html', {
         'program': program,
         'related': related
+    })
+
+def teamPage(request, category):
+    category_map = {
+        'executive' : 'executive',
+        'staff' : 'staff',
+        'board' : 'board',
+        'shareholder': 'shareholder',
+    }
+    cat_key = category_map.get(category)
+    if not cat_key:
+        cat_key = 'board'
+    
+    members = TeamMember.objects.filter(category=cat_key)
+    title = dict(TeamMember.CATEGORY_CHOICES).get(cat_key, 'Team')
+
+    return render(request, 'team.html', {
+        'members' : members,
+        'title' : title,
+        'category' : category
+    })
+
+def programSchedulePage(request):
+    schedule = ProgramSchedule.objects.all().order_by('day', 'start_time')
+    days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    return render(request, 'schedule.html', {
+        'schedule': schedule,
+        'days': days
     })
