@@ -46,7 +46,7 @@
 	<div class="dg archiev">
 
 		{% for p in programs %}
-			<article class="archiev_item col_4 df">
+			<a class="archiev_item col_4 df" href="{% url 'program_detail' p.id %}">
 				<aside class="archiev_name dfc on_homepage">
 					<figure class="df archiev_sign df">
 						<i class="cf cf-volume-up"></i> |
@@ -63,57 +63,27 @@
 				{% if p.featured_image %}
 					<img src="{{ p.featured_image.file.url }}" alt="{{ p.program_name }}" width="200">
 				{% endif %}
-			</article>
+			</a>
 		{% endfor %}
 
 	</div>
 </div>
 
 <div class="wrapper mt80">
-	<h5 class="bl-title">Gallery</h5>
-	<ul class="dg gallery">
-
-		<li class="gallery_item">
-			<a href="{% static 'images/studio1.jpg' %}"><img src="{% static 'images/studio1.jpg' %}" alt="Image"></a>
-		</li>
-		<li class="gallery_item">
-			<a href="{% static 'images/studio2.jpg' %}"><img src="{% static 'images/studio2.jpg' %}" alt="Image"></a>
-		</li>
-		<li class="gallery_item">
-			<a href="{% static 'images/proj1.jpg' %}"><img src="{% static 'images/proj1.jpg' %}" alt="Image"></a>
-		</li>
-		<li class="gallery_item">
-			<a href="{% static 'images/proj2.jpg' %}"><img src="{% static 'images/proj2.jpg' %}" alt="Image"></a>
-		</li>
-		<li class="gallery_item">
-			<a href="{% static 'images/gal1.png' %}"><img src="{% static 'images/gal1.png' %}" alt="Image"></a>
-		</li>
-		<li class="gallery_item">
-			<a href="{% static 'images/gal2.png' %}"><img src="{% static 'images/gal2.png' %}" alt="Image"></a>
-		</li>
-		<li class="gallery_item">
-			<a href="{% static 'images/gal3.png' %}"><img src="{% static 'images/gal3.png' %}" alt="Image"></a>
-		</li>
-		<li class="gallery_item">
-			<a href="{% static 'images/gal4.png' %}"><img src="{% static 'images/gal4.png' %}" alt="Image"></a>
-		</li>
-		<li class="gallery_item">
-			<a href="{% static 'images/woman.jpg' %}"><img src="{% static 'images/woman.jpg' %}" alt="Image"></a>
-		</li>
-		<li class="gallery_item">
-			<a href="{% static 'images/jhor.jpg' %}"><img src="{% static 'images/jhor.jpg' %}" alt="Image"></a>
-		</li>
-		<li class="gallery_item">
-			<a href="{% static 'images/mandali.jpg' %}"><img src="{% static 'images/mandali.jpg' %}" alt="Image"></a>
-		</li>
-		<li class="gallery_item">
-			<a href="{% static 'images/dhana.jpg' %}"><img src="{% static 'images/dhana.jpg' %}" alt="Image"></a>
-		</li>
-		<li class="gallery_item">
-			<a href="{% static 'images/deu.jpg' %}"><img src="{% static 'images/deu.jpg' %}" alt="Image"></a>
-		</li>
-
-	</ul>
+	{% for gal in galleries %}
+		<h5 class="bl-title">{{ gal.title }}</h5>
+		<ul class="dg gallery">
+		
+			{% for img in gal.images.all %}
+			<li class="gallery_item">
+				<a href="{{ img.image.file.url }}" alt="{{img.caption}}"><img src="{{ img.image.file.url }}" alt="{{img.caption}}"></a>
+			</li>
+			{% endfor %}
+		
+		</ul>
+	{% empty %}
+		<p>No images yet.</p>
+	{% endfor %}
 </div>
 
 {% endblock %}

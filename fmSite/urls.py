@@ -30,7 +30,8 @@ urlpatterns = [
     # urls.py
     path('news/', views.news_list, name='news'),
     path('news/<int:id>/', views.newsDetail, name='newsDetail'),
-    path('archiev/', views.archievPage, name='archiev')
+    path('archiev/', views.archievPage, name='archiev'),
+    path('program/<int:id>/', views.program_detail, name='program_detail'),
     
 ]
 urlpatterns += static(settings.CABINET_MEDIA_URL, document_root=settings.CABINET_MEDIA_ROOT)

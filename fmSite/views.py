@@ -1,18 +1,24 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 
-from fm.models import ArchiveProgram, Page, Slider, NewsPost
+from django.db.models import Max
+from fm import models
+from fm.models import ArchiveProgram, Page, Slider, NewsPost, Gallery
 
 def homePage(request):
     sliders = Slider.objects.all().order_by('order', '-id')
     about = get_object_or_404(Page, slug='about')
     newsItems = NewsPost.objects.all().order_by('-id')[:6]
-    programs = ArchiveProgram.objects.all().order_by('-id')[:3]
+    programs = ArchiveProgram.objects.all().order_by('-broadcast_date')[:3]
+    program = programs[0] if programs else None   
+    galleries = Gallery.objects.all().prefetch_related('images')
     homeData = {
         'sliderItems' : sliders,
         'aboutUs': about, 
         'news' : newsItems,
-        'programs': programs
+        'programs': programs,
+        'galleries': galleries,
+        'program': program
     }
     return render(request, 'index.html', homeData)
 
@@ -33,8 +39,24 @@ def news_list(request):
     return render(request, 'news.html', {'page_obj': page_obj})
 
 def archievPage(request):    
-    archievPrograms = ArchiveProgram.objects.all().order_by('-broadcast_date')
-    paginator = Paginator(archievPrograms, 2)  
+    archievPrograms = ArchiveProgram.objects.values('program_name') \
+        .annotate(latest_id=Max('id')) \
+        .values_list('latest_id', flat=True)
+
+    programs = ArchiveProgram.objects.filter(id__in=archievPrograms) \
+        .order_by('-broadcast_date')
+    # ap = archievPrograms[0] if archievPrograms else None  
+    paginator = Paginator(programs, 2)  
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request, 'archiev.html', {'page_obj': page_obj})
+
+def program_detail(request, id):
+    program = get_object_or_404(ArchiveProgram, id=id)
+    related = ArchiveProgram.objects.filter(
+        program_name=program.program_name
+    ).exclude(id=id).order_by('-broadcast_date')[:20]
+    return render(request, 'archiev-detail.html', {
+        'program': program,
+        'related': related
+    })
