@@ -36,6 +36,7 @@ django-mptt==0.18.0
 django-tinymce==4.1.0
 django-tinymce-images==0.1.2
 django-tree-queries==0.21.2
+django-widget-tweaks
 et_xmlfile==2.0.0
 executing==2.2.0
 EZGmail==2024.12.3
