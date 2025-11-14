@@ -4,25 +4,22 @@
             <h3 class="footer_title">Short Navigation</h3>
             <ul class="footer_ul">
                 <li class="footer_li litem">
-                    <a class="footer_a active" href="#">Home</a>
+                    <a class="footer_a {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">Home</a>
                 </li>
                 <li class="footer_li litem">
-                    <a class="footer_a" href="#">About Us</a>
+                    <a class="footer_a {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'about' %}">About Us</a>
                 </li>
                 <li class="footer_li litem">
-                    <a class="footer_a" href="#">News</a>
+                    <a class="footer_a {% if request.resolver_match.url_name == 'news' %}active{% endif %}" href="{% url 'news' %}">News</a>
                 </li>
                 <li class="footer_li litem">
-                    <a class="footer_a" href="#">Our Team</a>
+                    <a class="footer_a {% if request.resolver_match.url_name == 'program-schedule' %}active{% endif %} " href="{% url 'program-schedule' %}">Schedule</a>
                 </li>
                 <li class="footer_li litem">
-                    <a class="footer_a" href="#">Schedule</a>
-                </li>
-                <li class="footer_li litem">
-                    <a class="footer_a" href="#">Archiev</a>
+                    <a class="footer_a {% if request.resolver_match.url_name == 'archiev' %}active{% endif %}" href="{% url 'archiev' %}">Archiev</a>
                 </li>                
                 <li class="footer_li litem">
-                    <a class="footer_a" href="#">Contact</a>
+                    <a class="footer_a {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="{% url 'contact' %}">Contact</a>
                 </li>
             </ul>
         </div>

@@ -46,6 +46,7 @@
 		}
 	}
 	& .logo{
+		width:5rem;
 		@include max(991px){
 			align-self: flex-start;
 		}

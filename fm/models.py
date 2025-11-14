@@ -69,20 +69,6 @@ class TeamMember(models.Model):
     def __str__(self):
         return f"{self.name} - {self.designation}"
 
-# 4. Program Schedule (Daily, 7 days)
-# class ProgramSchedule(models.Model):
-#     DAYS = [(i, timezone.now().replace(day=i).strftime('%A')) for i in range(1, 8)]
-#     day = models.IntegerField(choices=DAYS)  # 1=Mon, ..., 7=Sun
-#     program_name = models.CharField(max_length=200)
-#     start_time = models.TimeField()
-#     end_time = models.TimeField()
-
-#     class Meta:
-#         unique_together = ('day', 'start_time', 'program_name')
-#         ordering = ['day', 'start_time']
-
-#     def __str__(self):
-#         return f"{self.program_name} ({self.get_day_display()})"
     
 class ProgramSchedule(models.Model):
     DAYS = [(i, timezone.now().replace(day=i).strftime('%A')) for i in range(1, 8)]
@@ -125,10 +111,10 @@ class ContactMessage(models.Model):
     phone = models.CharField(max_length=15)
     email = models.EmailField()
     message = models.TextField()
-    submitted_at = models.DateTimeField(auto_now_add=True)
+    sent_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Message from {self.name}"
+        return f"{self.name} - {self.email}"
 
 class Slider(models.Model):
     image = models.ForeignKey(MediaFile, on_delete=models.CASCADE,

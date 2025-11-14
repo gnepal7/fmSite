@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -13,11 +14,11 @@
 	<meta property="og:description" content="Nepali FM Radio, News, Entertainment, Songs, RJ">
 	<meta property="og:image" content="https://goodnewsfm.com.np/images/logo.png">
 	<meta property="og:url" content="https://budiganganews.com/">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="GoodNewsFM">
-  <meta name="twitter:description" content="FM Radio, news, world, politics, sports, entertainment">
-  <meta name="twitter:image" content="https://goodnewsfm.com.np/images/logo.png">
-	<title>GoodNewsFM</title>
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="GoodNewsFM">
+	<meta name="twitter:description" content="FM Radio, news, world, politics, sports, entertainment">
+	<meta name="twitter:image" content="https://goodnewsfm.com.np/images/logo.png">
+	<title>{{ title|default:'FM site template' }}</title>
 
 	<!-- custom favicon -->
 	<link rel="icon" href="{% static 'images/fav.png' %}" type="image/png">
@@ -30,6 +31,7 @@
 	<!-- custom -->
 	<link rel="stylesheet" type="text/css" href="{% static 'css/front.css' %}">
 </head>
+
 <body>
 	<script src="{% static 'js/jquery-3.5.0.min.js' %}"></script>
 	<script src="{% static 'js/jquery-ui.min.js' %}"></script>
@@ -41,51 +43,66 @@
 		<nav class="wrapper df nav">
 			<a class="logo" href="{% url 'home' %}">
 				{% with logo=site_logo.logo %}
-					{% if logo %}
-						<img src="{{ logo.file.url }}" alt="Site Logo" class="logo">
-					{% else %}
-						<img src="{% static 'images/fav.png' %}" alt="Default Logo" class="logo">
-					{% endif %}
+				{% if logo %}
+				<img src="{{ logo.file.url }}" alt="Site Logo" class="logo">
+				{% else %}
+				<img src="{% static 'images/fav.png' %}" alt="Default Logo" class="logo">
+				{% endif %}
 				{% endwith %}
 			</a>
 			<button class="nav_toggler">
 				<i class="cf cf-bars toggler"></i>
 			</button>
 			<ul class="nav_ul df">
-				<li class="nav_li">
-					<a class="nav_a {% if request.path == '/' %}active{% endif %}" href="{% url 'home' %}">Home</a>
-				</li>
-				<li class="nav_li">
-					<a class="nav_a {% if request.path == '/about' %}active{% endif %}" href="{% url 'about' %}">About Us</a>
-				</li>
-				<li class="nav_li">
-					<a class="nav_a {% if request.path == '/news' %}active{% endif %}" href="{% url 'news' %}">News</a>
-				</li>
-                <li class="nav_li drop"><a href="#" class="nav_a h5 db {% if request.path == '/team' %}active{% endif %}">Our Team</a>
-                    <ul class="submnu">
-                        <li class="submnu_item">
-                            <a href="{% url 'team' 'executive' %}" class="submnu_link h6 db">Executive Team</a>
-                            <a href="{% url 'team' 'staff' %}" class="submnu_link h6 db">Staffs</a>
-                            <a href="{% url 'team' 'board' %}" class="submnu_link h6 db">Board Members</a>
-                            <a href="{% url 'team' 'shareholder' %}" class="submnu_link h6 db">Share Holders</a>
-                        </li>
-                    </ul>
-                </li>
 
+				<!-- <li class="nav_li">
+					<a class="nav_a {% if request.path == '/' %}active{% endif %}" href="{% url 'home' %}">Home</a>
+				</li> -->
+				
 				<li class="nav_li">
-					<a class="nav_a {% if request.path == '/program-schedule' %}active{% endif %}" href="{% url 'program-schedule' %}">Schedule</a>
+					<a class="nav_a {% if request.resolver_match.url_name == 'home' %}active{% endif %}"
+						href="{% url 'home' %}">Home</a>
 				</li>
 				<li class="nav_li">
-					<a class="nav_a {% if request.path == '/archiev' %}active{% endif %}" href="{% url 'archiev' %}">Archiev</a>
+					<a class="nav_a {% if request.resolver_match.url_name == 'about' %}active{% endif %}"
+						href="{% url 'about' %}">About Us</a>
 				</li>
 				<li class="nav_li">
-					<a class="nav_a" href="contact.html">Contact</a>
+					<a class="nav_a {% if request.resolver_match.url_name == 'news' %}active{% endif %}"
+						href="{% url 'news' %}">News</a>
 				</li>
+				<li class="nav_li drop">
+					<a href="#"
+						class="nav_a h5 db {% if request.resolver_match.url_name == 'team' %}active{% endif %}">Our
+						Team</a>
+					<ul class="submnu">
+						<li class="submnu_item">
+							<a href="{% url 'team' 'executive' %}" class="submnu_link h6 db">Executive Team</a>
+							<a href="{% url 'team' 'staff' %}" class="submnu_link h6 db">Staffs</a>
+							<a href="{% url 'team' 'board' %}" class="submnu_link h6 db">Board Members</a>
+							<a href="{% url 'team' 'shareholder' %}" class="submnu_link h6 db">Share Holders</a>
+						</li>
+					</ul>
+				</li>
+				<li class="nav_li">
+					<a class="nav_a {% if request.resolver_match.url_name == 'program-schedule' %}active{% endif %}"
+						href="{% url 'program-schedule' %}">Schedule</a>
+				</li>
+				<li class="nav_li">
+					<a class="nav_a {% if request.resolver_match.url_name == 'archiev' %}active{% endif %}"
+						href="{% url 'archiev' %}">Archiev</a>
+				</li>
+				<li class="nav_li">
+					<a class="nav_a {% if request.resolver_match.url_name == 'contact' %}active{% endif %}"
+						href="{% url 'contact' %}">Contact</a>
+				</li>
+
 			</ul>
 			<figure class="live dfc">
 				<figcaption>Listen Live</figcaption>
 				<audio controls>
-				  <source src="{% static 'audio/test.mp3' %}" type="audio/mpeg">
+					<!-- <source src="{% static 'audio/test.mp3' %}" type="audio/mpeg"> -->
+					<source src="https://streaming.softnep.net:10988/;stream.nsv&type=mp3&volume=60">
 				</audio>
 			</figure>
 		</nav>
