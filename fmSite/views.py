@@ -29,6 +29,11 @@ def aboutPage(request):
 def newsDetail(request, id):
     post = get_object_or_404(NewsPost, id=id, is_published=True)
     return render(request, 'detail.html', {'post': post})
+
+def contactPage(request):
+    # contact = get_object_or_404(Page, slug='contact')
+    # return render(request, 'contact.html', {'page': contact})
+    return render(request, 'contact.html')
     
 # pagination
 def news_list(request):
