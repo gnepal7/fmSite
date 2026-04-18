@@ -110,10 +110,10 @@ class ContactMessage(models.Model):
     phone = models.CharField(max_length=15)
     email = models.EmailField()
     message = models.TextField()
-    submitted_at = models.DateTimeField(auto_now_add=True)
+    sent_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Message from {self.name}"
+        return f"{self.name} - {self.email}"
 
 class Slider(models.Model):
     image = models.ForeignKey(MediaFile, on_delete=models.CASCADE,

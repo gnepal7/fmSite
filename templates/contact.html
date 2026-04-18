@@ -3,35 +3,58 @@
 
 {% block content %}
 
-	<div class="wrapper dg detail mt80">
-		<div class="col_9">
-			<h5 class="bl-title">Contact Us</h5>
-			<form class="dg form">
-				<div class="col_6 form-group dfc">
-					<label for="name">Name</label>
-					<input type="text" id="name" class="form-input">
-				</div>
-				<div class="col_6 form-group dfc">
-					<label for="address">Address</label>
-					<input type="text" id="address" class="form-input">
-				</div>
-				<div class="col_6 form-group dfc">
-					<label for="phone">Phone</label>
-					<input type="text" id="phone" class="form-input">
-				</div>
-				<div class="col_6 form-group dfc">
-					<label for="email">Email</label>
-					<input type="text" id="email" class="form-input">
-				</div>
-				<div class="col_12 form-group dfc">
-					<label for="msg">Your Message</label>
-					<textarea name="msg" class="form-input" rows="7"></textarea>
-				</div>
-			</form>
+<div class="wrapper dg detail mt80">
+	<div class="col_9">
+
+		<h5 class="bl-title">Contact Us</h5>
+
+		{% if messages %}
+		<div class="dg message">
+			{% for message in messages %}
+			<div class="col_12 alert alert-{{ message.tags }} dfc">
+				{{ message }}
+			</div>
+			{% endfor %}
 		</div>
-		<div class="col_3">
-			<h4>Place for facebook follow page.</h4>
-		</div>
+		{% endif %}
+
+		<form method="post" class="dg form">
+			{% csrf_token %}
+
+			<div class="col_6 form-group dfc">
+				<label for="{{ form.name.id_for_label }}">Name</label>
+				{{ form.name|add_class:"form-input" }}
+			</div>
+
+			<div class="col_6 form-group dfc">
+				<label for="{{ form.address.id_for_label }}">Address</label>
+				{{ form.address|add_class:"form-input" }}
+			</div>
+
+			<div class="col_6 form-group dfc">
+				<label for="{{ form.phone.id_for_label }}">Phone</label>
+				{{ form.phone|add_class:"form-input" }}
+			</div>
+
+			<div class="col_6 form-group dfc">
+				<label for="{{ form.email.id_for_label }}">Email</label>
+				{{ form.email|add_class:"form-input" }}
+			</div>
+
+			<div class="col_12 form-group dfc">
+				<label for="{{ form.message.id_for_label }}">Your Message</label>
+				{{ form.message|add_class:"form-input" }}
+			</div>
+
+			<div class="col_3 form-group dfc">
+				<button class="btn btn-main-br btn-sm" type="submit">Send</button>
+			</div>
+		</form>
+
 	</div>
+	<div class="col_3">
+		<h4>Place for facebook follow page.</h4>
+	</div>
+</div>
 
 {% endblock %}

@@ -25,8 +25,7 @@ from fmSite import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.homePage, name='home'),
-    path('about', views.aboutPage, name='about'),
-    # path('news/', views.news_list, name='news'),
+    path('about/', views.aboutPage, name='about'),
     # urls.py
     path('news/', views.news_list, name='news'),
     path('news/<int:id>/', views.newsDetail, name='newsDetail'),

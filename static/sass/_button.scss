@@ -1,0 +1,126 @@
+.btn{
+	display: inline-block;
+	position:relative;
+	cursor: pointer;
+	&-sm{
+		@include btn-sm;
+	}
+	&-mid{
+		@include btn-mid;
+	}
+	&-big{
+		@include btn-big;
+	}
+	&-main-bg{
+		@include btn-bg($main);
+		&:hover{
+			@include border(1px, solid, $main);
+			color:$main;
+		}
+	}
+	&-ass-bg{
+		@include btn-bg($ass);
+		&:hover{
+			@include border(1px, solid, $ass);
+			color:$ass;
+		}
+	}
+	&-dgrayck-bg{
+		@include btn-bg($dgray);
+		&:hover{
+			@include border(1px, solid, $dgray);
+			color:$dgray;
+		}
+	}
+	&-main-bg,
+	&-ass-bg,
+	&-dgrayck-bg{
+		color:$white;
+		@include border(1px, solid, transparent);
+		&:hover{
+			background-color:transparent;
+		}
+	}
+	&-gray-bg{
+		background-color:$gray;
+	}
+	&-dim-bg{
+		background-color:$light;
+	}
+	&-gray-bg,
+	&-dim-bg{
+		color:$dgray;
+	}
+	&-main-br{
+		@include border(1px, solid, $main);
+		color:$main;
+		&:hover{
+			background-color:$main;
+		}
+	}
+	&-ass-br{
+		@include border(1px, solid, $ass);
+		color:$ass;
+		&:hover{
+			background-color:$ass;
+		}
+	}
+	&-dgrayck-br{
+		@include border(1px, solid, $dgray);
+		color:$dgray;
+		&:hover{
+			background-color:$dgray;
+		}
+	}
+	&-main-br,
+	&-ass-br,
+	&-dgrayck-br{
+		&:hover{
+			color:$white;
+			border-color:transparent;
+		}
+	}
+	&-gray-br{
+		@include border(1px, solid, $gray);
+		&:hover{
+			background-color:$gray;
+		}
+	}
+	&-dim-br{
+		@include border(1px, solid, $light);
+		&:hover{
+			background-color:$light;
+		}
+	}
+	&-gray-br,
+	&-dim-br{
+		&:hover{
+			color:$dgray;
+			border-color:transparent;
+		}
+	}
+	transition:all ease-in-out .6s;
+	text-transform: uppercase;
+	&:hover{
+		&:after{
+			width:100%;
+			@include vendor(transform, translate(0, 0));
+			visibility: visible;
+			left:0;
+		}
+	}
+	&:after {
+		position: absolute;
+		content: '';
+		top:0;
+		left: -30%;
+		width: 0;
+		height: 100%;
+		background-color:inherit;
+		transition:width 0.35s ease;
+		z-index:-1;
+		border-radius: inherit;
+		@include vendor(transform, translate(-30%, 0));
+		visibility: hidden;
+	}
+}

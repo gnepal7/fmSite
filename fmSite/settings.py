@@ -26,7 +26,16 @@ SECRET_KEY = 'django-insecure-fsv@7-mk!gmi7&brp*#vb^%md_sm6=t)31gcwr+uh1-qf)_2yp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['fmsite.onrender.com', 'localhost', '127.0.0.1']
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'mail@gmail.com'
+EMAIL_HOST_PASSWORD = 'lisn ochb vjkg rfqj'
+
 
 
 # Application definition
@@ -40,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'fm',
     'tinymce',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -65,7 +75,13 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'fm.context_processors.site_logo',
+
+                'django.template.context_processors.debug',
+
             ],
+            # 'libraries': {
+            #     'form_tags': 'django.templatetags.form_tags',  
+            # },
         },
     },
 ]

@@ -53,8 +53,8 @@ class ArchiveProgramAdmin(admin.ModelAdmin):
 
 @admin.register(ContactMessage)
 class ContactMessageAdmin(admin.ModelAdmin):
-    list_display = ['name', 'email', 'submitted_at']
-    readonly_fields = ['submitted_at']
+    list_display = ['name', 'email', 'sent_at']
+    readonly_fields = ['sent_at']
     search_fields = ['name', 'email']
 
 @admin.register(Slider)

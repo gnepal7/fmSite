@@ -85,7 +85,8 @@
 			<figure class="live dfc">
 				<figcaption>Listen Live</figcaption>
 				<audio controls>
-				  <source src="{% static 'audio/test.mp3' %}" type="audio/mpeg">
+				  {% comment %} <source src="{% static 'audio/test.mp3' %}" type="audio/mpeg"> {% endcomment %}
+					<source src="https://streaming.softnep.net:10988/;stream.nsv&type=mp3&volume=60">
 				</audio>
 			</figure>
 		</nav>

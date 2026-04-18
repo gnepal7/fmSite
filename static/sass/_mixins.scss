@@ -1,0 +1,196 @@
+@mixin name($property, $n) {
+  #{$property}: $n * .7rem;
+  @include max(767px){
+    #{$property}: $n * .4rem;
+  }
+}
+/* media queries */
+@mixin min($width){
+	@media (min-width: #{$width}){
+		@content;
+	}
+}
+@mixin max($width){
+	@media (max-width: #{$width}){
+	 @content;
+	}
+}
+@mixin break($args...){
+  @if length($args) == 1{
+    @media (max-width: nth($args, 1)){
+      @content;
+    }
+  } @else {
+    @media (min-width: nth($args, 1))
+    and (max-width: nth($args, 2)){
+      @content;
+    }
+  }
+}
+/***** container query *****/
+@mixin cqmn($width){
+  @container (min-width: #{$width}){
+    @content;
+  }
+}
+@mixin cqmx($width){
+  @container (max-width: #{$width}){
+     @content;
+  }
+}
+/***** clamp mixin for width, font-size, ... ******/
+@mixin clamp($prop, $min, $value, $max) {
+  #{$prop}: clamp(#{$min}, #{$value}, #{$max});
+}
+/***** custom grid by setting number and margin *****/
+@mixin layGrid($qty, $mgn){
+	width:((100% - (($qty - 1) * $mgn)) / $qty);
+	&:nth-child(n){
+		margin-right:$mgn;
+		margin-bottom:$mgn;
+	}
+	&:nth-child(#{$qty}n){
+		margin-right:0;
+		margin-bottom:0;
+	}
+}
+/***** other useful mixins *****/
+@mixin clearfix{
+	&:before,
+	&:after{
+		content: "";
+		display: table;
+	}
+	&:after{
+		clear: both;
+	}
+}
+@mixin clear() {
+  &:before, &:after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    overflow: hidden;
+  }
+  &:after {
+    clear: both;
+  }
+}
+@mixin ltoffscrn() {
+  text-indent: -9999px;
+  overflow: hidden;
+  text-decoration: none;
+  display: block;
+  font-size: 0;
+  text-align: start;
+}
+@mixin haf($property, $value) {
+  &:hover, &:active, &:focus {
+    #{$property}: $value;
+  }
+}
+@mixin box-shadow($left, $top, $blur, $color) {
+	box-shadow: $left $top $blur $color;
+}
+@mixin radius($radius) {
+	border-radius: $radius;
+}
+@mixin radiusSide($dir, $amt){
+	border-#{$dir}-radius:$amt;
+}
+@mixin pad ($pads...) {
+  padding: $pads;
+}
+@mixin mgn ($mgns...) {
+  margin: $mgns;
+}
+@mixin transform($property) {
+  transform: $property;
+}
+@mixin absPos ($top, $right, $bottom, $left) {
+  position: absolute;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+@mixin vendor($property, $value) {
+	-webkit-#{$property}: $value;
+	-moz-#{$property}: $value;
+	-ms-#{$property}: $value;
+	-o-#{$property}: $value;
+	#{$property}: $value;
+}
+@mixin appearance($value){
+  appearance: $value;
+}
+@mixin user-select($value){
+  user-select: $value;
+}
+@mixin transition($args) {
+  transition: $args;
+}
+@mixin border($width, $style, $color){
+	border: $width $style $color;
+}
+@mixin borderSide($direction, $width, $style, $color) {
+    border-#{$direction}: $width $style $color;
+}
+@mixin bgGradient($dir, $color, $color){
+	background-image: -ms-linear-gradient($dir, $color, $color);
+	background-image: linear-gradient($dir, $color, $color);
+}
+@mixin overBg{
+	content:"";
+	// @include bgGradient(to top, rgba($bla, .9), rgba($bla, .3));
+  background-image: -ms-linear-gradient(to top, rgba($bla, .9), rgba($bla, .3));
+  background-image: linear-gradient(to top, rgba($bla, .9), rgba($bla, .3));
+	height:100%;
+	@include absPos(auto, 0, 0, 0);
+}
+@mixin lc($n){
+	-webkit-line-clamp:$n;
+	display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+@mixin imgPos{
+	background-size: cover !important;
+	background-repeat: no-repeat !important;
+	background-position: center center !important;
+}
+@mixin btn-bg($bg-color){
+	background-color:$bg-color;
+}
+@mixin btn-sm{
+	padding:.5rem 1rem;
+	font-size:.85rem;
+	@include radius(.5rem);
+}
+@mixin btn-mid{
+	padding:.7rem 1.2rem;
+	font-size:1.1rem;
+	@include radius(1rem);
+}
+@mixin btn-big{
+	padding:1rem 2rem;
+	font-size:1.3rem;
+	@include radius(2rem);
+}
+@mixin fs($i) {
+	$base-font-size-dkt: 2.2rem;
+  $base-font-size-mob: 1.5rem;
+  $ratio: 1.1;
+  $size-dkt: ( $base-font-size-dkt / $i) + $ratio ;
+  $size-mob: ( $base-font-size-mob / $i) + $ratio ;
+  @include clamp(font-size, $size-mob, 3vw, $size-dkt )
+}
+@mixin af($min:null, $mx:null, $min2:null, $mx2:null){
+  grid-template-columns: repeat(auto-fit, minmax($min, $mx) minmax($min2, $mx2));
+  @include max(767px){
+    grid-template-columns: repeat(auto-fit, minmax($min, $mx));
+  }
+}
+@mixin snap($property){
+  scroll-snap-type: $property mandatory;
+}

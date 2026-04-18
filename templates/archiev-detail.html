@@ -16,7 +16,8 @@
 				<ul class="audio_ul dfc">
 					{% for r in related %}
 					<li class="audio_li">
-						<a class="audio_a" href="{% url 'program_detail' r.id %}">
+						<a class="audio_a df gap-1" href="{% url 'program_detail' r.id %}">
+							<i class="cf cf-volume-up"></i>
 							<time>{{ r.broadcast_date|date:"d M Y" }}</time>
 						</a>
 					</li>
